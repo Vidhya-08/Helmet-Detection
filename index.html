@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+      }
+      .grid {
+        background-color: rgb(82, 131, 147);
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+      }
+      h2 {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 45px;
+        text-align: center;
+      }
+      #size,
+      #qrtext {
+        width: 200px;
+        height: auto;
+        box-shadow: 2px 2px 2px 2px rgba(37, 85, 115, 0.715);
+        text-align: center;
+        font-size: large;
+      }
+      input {
+        border-radius: 10px;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        width: 100px;
+        font-size: large;
+        transition: 0.4s;
+      }
+      input:hover {
+        box-shadow: 2px 2px 2px 2px white;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function genQR() {
+        var gapi =
+          "https://chart.googleapis.com/chart?chf=bg,s,65432100&cht=qr&chs=";
+        var myimg = document.getElementById("img");
+        var text = document.getElementById("qrtext").value;
+        var mysize = document.getElementById("size").value;
+
+        if (text !== "" && mysize == "100") {
+          myimg.src = gapi + "100x100" + "&chl=" + text;
+        } else if (text !== "" && mysize == "150") {
+          myimg.src = gapi + "150x150" + "&chl=" + text;
+        } else if (text !== "" && mysize == "200") {
+          myimg.src = gapi + "200x200" + "&chl=" + text;
+        } else {
+          alert("Please enter text");
+        }
+      }
+    </script>
+    <div class="grid">
+      <h2>QR Code Generator</h2>
+      <center>
+        <img src="" id="img" />
+      </center>
+      <select id="size">
+        <option value="100">100x100</option>
+        <option value="150">150x150</option>
+        <option value="200" selected>200x200</option>
+      </select>
+      <br /><br />
+      <textarea placeholder="Enter your text" id="qrtext"></textarea>
+      <br /><br />
+      <input type="submit" value="Generate" onclick="genQR()" />
+    </div>
+  </body>
+</html>
